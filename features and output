@@ -1,0 +1,30 @@
+Main Features:
+
+Student name entry
+Webcam access
+Face-scan interface
+Attendance marking
+Display attendance records
+Show date and time
+
+output:
+       📸 Face Recognition Attendance
+
+       Enter Student Name
+       [     Lalitha      ]
+
+       [ Start Camera ] [ Mark Attendance ]
+
+              ┌───────────────┐
+              │               │
+              │    CAMERA     │
+              │               │
+              └───────────────┘
+
+              Attendance Records
+
+------------------------------------------------
+Name       Date          Time          Status
+------------------------------------------------
+Lalitha    30/09/2026    6:30 PM       Present
+------------------------------------------------
