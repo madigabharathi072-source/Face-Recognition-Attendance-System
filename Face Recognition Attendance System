@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Recognition Attendance</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        video {
+            width: 400px;
+            height: 300px;
+            border: 2px solid #333;
+            margin: 15px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+        }
+
+        th {
+            background: #ddd;
+        }
+
+        #message {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📸 Face Recognition Attendance</h1>
+
+    <input type="text" id="studentName"
+           placeholder="Enter Student Name">
+
+    <br>
+
+    <button onclick="startCamera()">
+        Start Camera
+    </button>
+
+    <button onclick="markAttendance()">
+        Mark Attendance
+    </button>
+
+    <br>
+
+    <video id="camera" autoplay></video>
+
+    <p id="message"></p>
+
+    <h2>Attendance Records</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+
+        <tbody id="attendanceTable"></tbody>
+    </table>
+
+</div>
+
+<script>
+
+let camera = document.getElementById("camera");
+
+// Start webcam
+function startCamera() {
+
+    navigator.mediaDevices.getUserMedia({
+        video: true
+    })
+    .then(function(stream) {
+
+        camera.srcObject = stream;
+
+        document.getElementById("message").innerHTML =
+            "Camera started. Ready for face scan.";
+
+    })
+    .catch(function(error) {
+
+        document.getElementById("message").innerHTML =
+            "Unable to access camera.";
+
+        console.log(error);
+    });
+}
+
+
+// Mark attendance
+function markAttendance() {
+
+    let name =
+        document.getElementById("studentName").value;
+
+    if (name === "") {
+
+        alert("Please enter student name.");
+        return;
+    }
+
+    let now = new Date();
+
+    let date =
+        now.toLocaleDateString();
+
+    let time =
+        now.toLocaleTimeString();
+
+    let table =
+        document.getElementById("attendanceTable");
+
+    let row =
+        table.insertRow();
+
+    row.insertCell(0).innerHTML = name;
+    row.insertCell(1).innerHTML = date;
+    row.insertCell(2).innerHTML = time;
+    row.insertCell(3).innerHTML = "Present";
+
+    document.getElementById("message").innerHTML =
+        "Attendance marked successfully!";
+
+    document.getElementById("studentName").value = "";
+}
+
+</script>
+
+</body>
+</html>
